@@ -8,7 +8,7 @@ public static class CommandAPI
 
     public static bool TryHandle(string message)
     {
-        if (!message.StartsWith("/")) return false;
+        if (!message.StartsWith('/')) return false;
 
         string[] parts = message.TrimStart('/').Split(' ');
         string cmd = parts[0].ToLower();

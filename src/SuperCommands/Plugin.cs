@@ -28,9 +28,8 @@ public partial class Plugin : BaseUnityPlugin
         private static bool Prefix(string message)
         {
             if (!NetworkServer.active) return true;
-            if (CommandAPI.TryHandle(message)) return false;
 
-            return true;
+            return !CommandAPI.TryHandle(message);
         }
     }
 }
