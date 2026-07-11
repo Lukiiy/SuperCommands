@@ -17,7 +17,7 @@ public static class CommandAPI
 
         try
         {
-            command.Execute(parts.Skip(1).ToArray());
+            command.Execute([.. parts.Skip(1)]);
         }
         catch (Exception e)
         {
