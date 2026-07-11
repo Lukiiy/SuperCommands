@@ -2,6 +2,7 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Mirror;
+using SuperCommands.provided;
 
 namespace SuperCommands;
 
@@ -18,7 +19,9 @@ public partial class Plugin : BaseUnityPlugin
 
         Log.LogInfo($"Mod {Name} loaded!");
         harmony.PatchAll();
-        Commands.Register();
+
+        // register provided ones
+        CommandAPI.Register(new Kill());
     }
 
     [HarmonyPatch(typeof(TextChatManager), nameof(TextChatManager.SendChatMessage))]
