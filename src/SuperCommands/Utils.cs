@@ -17,10 +17,10 @@ public static class Utils
 
         PlayerInfo[] all = UnityEngine.Object.FindObjectsByType<PlayerInfo>(FindObjectsSortMode.None);
 
-        PlayerInfo? exact = all.FirstOrDefault(p => p.PlayerId.PlayerNameNoRichText.Equals(input, StringComparison.OrdinalIgnoreCase));
+        PlayerInfo? exact = all.FirstOrDefault(p => p.name.Equals(input, StringComparison.OrdinalIgnoreCase));
         if (exact != null) return exact;
 
-        IEnumerable<PlayerInfo> starts = all.Where(p => p.PlayerId.PlayerNameNoRichText.StartsWith(input, StringComparison.OrdinalIgnoreCase));
+        IEnumerable<PlayerInfo> starts = all.Where(p => p.name.StartsWith(input, StringComparison.OrdinalIgnoreCase));
         if (starts.Any()) return starts.First();
 
         return null;
