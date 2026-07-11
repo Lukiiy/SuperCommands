@@ -2,24 +2,30 @@ namespace SuperCommands;
 
 public static class CommandAPI
 {
-    private static readonly Dictionary<string, Action<string[]>> commands = [];
+    private static readonly Dictionary<string, Command> commands = [];
 
-    public static void Register(string command, Action<string[]> handler) => commands[command.ToLower()] = handler;
+    public static void Register(Command command) => commands[command.Name.ToLower()] = command;
 
     public static bool TryHandle(string message)
     {
         if (!message.StartsWith('/')) return false;
 
-        string[] parts = message.TrimStart('/').Split(' ');
-        string cmd = parts[0].ToLower();
-        string[] args = parts.Length > 1 ? parts[1..] : [];
+        string[] parts = message[1..].Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-        if (commands.TryGetValue(cmd, out var handler))
+        if (parts.Length == 0) return true;
+        if (!commands.TryGetValue(parts[0].ToLower(), out Command command)) return false;
+
+        try
         {
-            handler(args);
-            return true;
+            command.Execute(parts.Skip(1).ToArray());
+        }
+        catch (Exception e)
+        {
+            Utils.SendMessage($"An error occurred: {e.Message}");
+            Plugin.Log.LogError($"An error occurred while executing \"/{command.Name}\".");
+            Plugin.Log.LogError(e);
         }
 
-        return false;
+        return true;
     }
 }
