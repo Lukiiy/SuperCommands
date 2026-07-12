@@ -39,7 +39,7 @@ public sealed class Give : Command
 
         string message;
 
-        if (oneItem) message = $"Gave {item.ToString()} with {amount} usages to {target.name}."; else message = $"Gave {amount}x {itemArg} to {target.name}.";
+        if (oneItem) message = $"Gave {item.ToString()} with {amount} usages to {target.name}."; else message = $"Gave {amount}x {item.ToString()} to {target.name}.";
 
         Utils.SendMessage(message);
     }
