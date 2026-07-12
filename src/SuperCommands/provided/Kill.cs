@@ -8,11 +8,11 @@ public sealed class Kill : Command
 
     public override void Execute(string[] args)
     {
-        if (args.Length == 0) throw new CommandException(this, "Missing player name.");
+        if (args.Length == 0) throw CommandException.Usage(this);
 
         string target = string.Join(" ", args);
 
-        PlayerInfo player = Utils.GetPlayerByName(target) ?? throw new CommandException(this, $"Player {target} not found.");
+        PlayerInfo player = Utils.GetPlayerByName(target) ?? throw CommandException.PlayerNotFound(this, target);
 
         player.AsGolfer.ServerEliminate(EliminationReason.OutOfBounds);
         Utils.SendMessage($"Killed {target}.");

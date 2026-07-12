@@ -8,10 +8,10 @@ public sealed class Score : Command
 
     public override void Execute(string[] args)
     {
-        if (args.Length < 3) throw new CommandException(this, "Invalid usage!");
+        if (args.Length < 3) throw CommandException.Usage(this);
 
         bool add = args[1] == "+";
-        int amount = 0;
+        int amount;
 
         try
         {
@@ -22,7 +22,7 @@ public sealed class Score : Command
             throw new CommandException(this, "Invalid amount.");
         }
 
-        PlayerInfo player = Utils.GetPlayerByName(args[0]) ?? throw new CommandException(this, $"Player {args[0]} not found.");
+        PlayerInfo player = Utils.GetPlayerByName(args[0]) ?? throw CommandException.PlayerNotFound(this, args[0]);
 
         if (add) Add(player.AsGolfer, amount);
         else Add(player.AsGolfer, -amount);
