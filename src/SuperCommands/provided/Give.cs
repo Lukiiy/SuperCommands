@@ -34,12 +34,12 @@ public sealed class Give : Command
         }
         else
         {
-            target.Inventory.ServerTryAddItem(item.Value, data.MaxUses);
+            target.Inventory.ServerTryAddItem(item.Value, amount * data.MaxUses);
         }
 
         string message;
 
-        if (oneItem) message = $"Gave {itemArg} with {amount} usages to {target.name}."; else message = $"Gave {amount}x {itemArg} to {target.name}.";
+        if (oneItem) message = $"Gave {item.ToString()} with {amount} usages to {target.name}."; else message = $"Gave {amount}x {itemArg} to {target.name}.";
 
         Utils.SendMessage(message);
     }
