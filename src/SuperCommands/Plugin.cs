@@ -25,6 +25,7 @@ public partial class Plugin : BaseUnityPlugin
         CommandAPI.Register(new Score());
         CommandAPI.Register(new ForceEnd());
         CommandAPI.Register(new Clear());
+        CommandAPI.Register(new Give());
     }
 
     [HarmonyPatch(typeof(TextChatManager), nameof(TextChatManager.SendChatMessage))]
