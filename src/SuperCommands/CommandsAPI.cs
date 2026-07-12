@@ -13,7 +13,11 @@ public static class CommandAPI
         string[] parts = message[1..].Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
         if (parts.Length == 0) return true;
-        if (!commands.TryGetValue(parts[0].ToLower(), out Command command)) return false;
+        if (!commands.TryGetValue(parts[0].ToLower(), out Command command))
+        {
+            Utils.SendMessage($"Unknown command: {parts[0]}");
+            return true;
+        }
 
         try
         {
