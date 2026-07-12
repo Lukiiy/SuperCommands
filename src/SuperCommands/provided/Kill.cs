@@ -10,11 +10,9 @@ public sealed class Kill : Command
     {
         if (args.Length == 0) throw CommandException.Usage(this);
 
-        string target = string.Join(" ", args);
-
-        PlayerInfo player = Utils.GetPlayerByName(target) ?? throw CommandException.PlayerNotFound(this, target);
+        PlayerInfo player = Utils.GetPlayerByName(args[0]) ?? throw CommandException.PlayerNotFound(this, args[0]);
 
         player.AsGolfer.ServerEliminate(EliminationReason.OutOfBounds);
-        Utils.SendMessage($"Killed {target}.");
+        Utils.SendMessage($"Killed {player.name}.");
     }
 }
