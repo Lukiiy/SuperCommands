@@ -38,7 +38,9 @@ public partial class Plugin : BaseUnityPlugin
         {
             if (!NetworkServer.active) return true;
 
-            return !CommandAPI.TryHandle(message);
+            if (CommandAPI.TryHandle(message)) return false;
+
+            return true;
         }
     }
 }
