@@ -1,4 +1,4 @@
-﻿using BepInEx;
+﻿﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using Mirror;
@@ -23,6 +23,8 @@ public partial class Plugin : BaseUnityPlugin
         // register provided ones
         CommandAPI.Register(new Kill());
         CommandAPI.Register(new Score());
+        CommandAPI.Register(new ForceEnd());
+        CommandAPI.Register(new Clear());
     }
 
     [HarmonyPatch(typeof(TextChatManager), nameof(TextChatManager.SendChatMessage))]
