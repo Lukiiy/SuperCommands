@@ -34,7 +34,7 @@ public sealed class Give : Command
         }
         else
         {
-            target.Inventory.ServerTryAddItem(item.Value, amount * data.MaxUses);
+            target.Inventory.ServerTryAddItem(item.Value, amount);
         }
 
         string message;
