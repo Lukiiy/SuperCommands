@@ -26,7 +26,7 @@ public sealed class Give : Command
 
         ItemType? item = ParseItem(itemArg) ?? throw new CommandException(this, $"Invalid item \"{itemArg}\"");
 
-        if (!GameManager.AllItems.TryGetItemData(item.Value, out var data)) throw new CommandException(this, $"Invalid item or not enough space!"); // no space or invalid item
+        GameManager.AllItems.TryGetItemData(item.Value, out var data);
 
         if (!oneItem)
         {
@@ -39,7 +39,7 @@ public sealed class Give : Command
 
         string message;
 
-        if (oneItem) message = $"Gave {item.ToString()} with {amount} usages to {target.name}."; else message = $"Gave {amount}x {item.ToString()} to {target.name}.";
+        if (oneItem) message = $"Gave {item} with {amount} usages to {target.name}."; else message = $"Gave {amount}x {item} to {target.name}.";
 
         Utils.SendMessage(message);
     }
