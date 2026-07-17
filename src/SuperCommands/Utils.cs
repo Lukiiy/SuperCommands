@@ -40,7 +40,7 @@ public static class Utils
         if (!((NetworkBehaviour) (object) SingletonNetworkBehaviour<TextChatManager>.Instance).isServer) return;
 
         SendMessage(message); // host
-        foreach (PlayerGolfer? player in CourseManager.ServerMatchParticipants ?? Enumerable.Empty<PlayerGolfer>())
+        foreach (PlayerGolfer? player in CourseManager.MatchParticipants ?? Enumerable.Empty<PlayerGolfer>())
         {
             if (player != null && !((NetworkBehaviour) (object) player).isLocalPlayer) RpcMsgFunction(SingletonNetworkBehaviour<TextChatManager>.Instance, $"[Broadcast] {message}", player.PlayerInfo);
         }

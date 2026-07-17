@@ -22,7 +22,7 @@ public sealed class Clear : Command
         PlayerInventory inventory = player.Inventory;
 
         for (int i = inventory.slots.Count - 1; i >= 0; i--)
-            if (inventory.slots[i].itemType != ItemType.None) inventory.RemoveItemAt(i, false);
+            if (inventory.slots[i].itemType != ItemType.None) inventory.RemoveItemAt(i, false, false);
 
         Utils.SendMessage($"Cleared {player.name}'s inventory.");
     }
